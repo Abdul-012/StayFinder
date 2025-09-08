@@ -1,0 +1,190 @@
+body
+{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    background-color: #f4eeee;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+} 
+.container
+{
+    flex:`;
+  
+   /* width: 100%; */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 100px;
+}
+.fa-location-arrow
+{
+    color: #e67c4b;
+    font-size: 45px;
+    margin-left: 5px;
+    margin-top: 5px;
+
+}
+.nav-link
+{
+    color: #333 !important;
+    font-size: 18px !important;
+    margin-right: 15px;
+}
+
+/* Footer Styles */
+.f-info
+{
+    display: flex;
+    height:8rem;
+    background: #f5efef;
+    text-align: center;
+    justify-content: center;
+    align-items: space-evenly;
+    flex-wrap: wrap;
+
+}
+.f-info-links a
+{
+   
+    color: #222222;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.f-info-links a:hover
+{
+   text-decoration: underline;
+}
+.f-info-links,
+.f-copyright,
+.f-info-socials
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+   
+}
+.f-info-socials
+{
+    font-size: 1.3rem;
+    margin-right: 10px;
+    width: 100%;
+    gap: 10px;
+    padding-top: 7px;
+}
+
+
+/* Cards */
+
+.card
+{
+  border: none !important;
+  margin-bottom: 2rem;
+
+}
+
+.card-img-top
+{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    height: 400px !important;
+    object-fit: cover !important;
+}
+.card-body
+{
+    padding: 0  !important;
+  
+
+}
+.card-text
+{
+    font-weight:400 !important;
+   
+}
+.card-link
+{
+    text-decoration: none !important;
+}
+/* Card hover effect */
+.card-img-overlay
+{
+    opacity: 0;
+}
+.card-img-overlay:hover
+{
+    /* transform: translateY(-5px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease; */
+    opacity: 0.2;
+    background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Cards*/
+/* .card
+{
+  border: none;
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+.card-body
+{
+    padding: 100rem;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+.card-img-top
+{
+   height: 400px; 
+   object-fit: cover;
+}  */
+
+
+/*new page*/
+.btn.add-btn
+{
+    background-color: #0e8bf3;
+    border: none;
+}
+.btn.add-btn:hover
+{
+    background-color: #0b6fc1;
+}
+
+/*edit page*/
+.btn.btn-dark
+{
+    background: #7309f5;
+    border: none;
+}
