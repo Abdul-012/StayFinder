@@ -1,0 +1,95 @@
+node_modules/
+npm-debug.log*
+.env
+.DS_Store
+coverage/
+.idea/
+.vscode/
+dist/
+logs/
+*.log
+public/uploads/
+data/*.json
+init/data.js
+models/init/data.js
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+.env.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+tmp/
+temp/
+cache/
+.cache/
+.parcel-cache/
+
+# Build output
+dist/
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors/IDEs
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Test output
+.nyc_output/
+
+# Uploads and storage
+public/uploads/
+uploads/
+storage/
+tmp_uploads/
+
+# Database and data
+*.sqlite
+*.sqlite3
+db.sqlite3
+data/*.json
+init/data.js
+models/init/data.js
+
+# Secrets and keys
+*.pem
+*.key
+*.p12
+
+# Framework / Tooling
+.next/
+.vercel/
+.turbo/
+.cache-loader/
+.sass-cache/
+.serverless/
+
+# Packages
+*.tgz
+
+# Misc
+.DS_Store
+Thumbs.db
+.env
