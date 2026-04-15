@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
-const reviewSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema(
+    {
     Comment: String,
-    Rating: {
+    Rating: 
+    {
         type: Number,
         min: 1,
         max: 5,
         required: true
     },
-    createdAt: {
+    createdAt: 
+    {
         type: Date,
         default: Date.now
     }
