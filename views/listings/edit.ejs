@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate') -%>
 
-<body class="row">
+<div class="row">
   <div class="col-8 offset-2">
   <div class="container">
     <h2 class="mb-4 ">Edit Listing</h2>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
 
 
       <div class="mb-3 ">
@@ -28,14 +28,27 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Image URL</label>
+        <label for="imageUrl" class="form-label">Current Image URL</label>
         <input 
           type="url" 
-          id="image" 
-          name="listing[image]" 
+          id="imageUrl" 
+          name="listing[image][url]" 
           class="form-control" 
-          value="<%= listing.image %>" 
-          required>
+          value="<%= listing.image && listing.image.url ? listing.image.url : '' %>">
+        <input type="hidden" name="listing[image][filename]" value="<%= listing.image && listing.image.filename ? listing.image.filename : '' %>">
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input name="listing[image]" id="image" class="form-control" type="file" accept="image/png,image/jpeg,image/jpg">
+      </div>
+
+      <div class="mb-3">
+        <img
+          id="imagePreview"
+          class="edit-image-preview"
+          src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=60' %>"
+          alt="Listing image preview">
       </div>
 
       <div class="mb-3">
@@ -78,4 +91,4 @@
     </form>
   </div>
   </div>
-</body>
+</div>

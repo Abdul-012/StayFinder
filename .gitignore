@@ -24,6 +24,7 @@ pnpm-debug.log*
 .env
 .env.*
 .env.local
+!.env.example
 
 # Logs
 logs/
@@ -93,3 +94,4 @@ models/init/data.js
 .DS_Store
 Thumbs.db
 .env
+!.env.example

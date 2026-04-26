@@ -5,14 +5,22 @@ const path=require("path")
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError=require("./utils/ExpressError.js");
-const listings=require("./routes/listing.js")
-const reviews=require("./routes/review.js")
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User = require("./models/user.js");
+
+if(process.env.NODE_ENV !== "production")
+    {
+    require('dotenv').config();
+}
+
 const session = require('express-session');
 const flash = require('connect-flash');
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require("./models/user.js");
+
+const listingsRouters=require("./routes/listing.js")
+const reviewsRouters=require("./routes/review.js")
+const userRoutes=require("./routes/user.js")
 
 // Port
 const port=8080;
@@ -23,7 +31,6 @@ app.use(express.static(path.join(__dirname,"/public")))
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname, 'public')));
 
 const sessionOptions = {
     secret: "majorprojectsecret",
@@ -38,17 +45,26 @@ const sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(flash());
+// Passport Configuration 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // Middleware to set local variables for flash messages and current user
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currentUser = req.user;
     next();
 });
 
 // Mounting the routers
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingsRouters);
+app.use("/listings/:id/reviews", reviewsRouters);
+app.use("/", userRoutes);
 
 // Database Connection
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
@@ -67,25 +83,6 @@ const Review=require("./models/reviews.js")
 //Home Route
 app.get("/",(req,res)=>{
     res.send("Hello World")
-});
-
-// Passport Configuration
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser())
-
-// demo user creation route
-app.get("/demouser", async (req, res) => {  
-    try {
-        const demoUser = new User({ username: "demoUser" });
-        const registeredUser = await User.register(demoUser, "password123");
-        res.send("Demo user created successfully");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error creating demo user");
-    }
 });
 
 // 404 Error Handling Middleware

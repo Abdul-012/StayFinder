@@ -12,15 +12,10 @@ const listingSchema = new schema({
         required: true
     },
     image: {
-        filename: { type: String, default: "listingimage" },
-        url: {
-            type: String,
-            default: "https://thumbs.dreamstime.com/b/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg",
-            set: (url) =>
-                url === ""
-                    ? "https://thumbs.dreamstime.com/b/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg"
-                    : url,
-        },
+        url: String,
+        filename: String
+        
+        
     },
     price: {
         type: Number,
@@ -34,12 +29,27 @@ const listingSchema = new schema({
         type: String,
         required: true
     },
+    geometry: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            default: "Point"
+        },
+        coordinates: {
+            type: [Number],
+            default: [0, 0]
+        }
+    },
     reviews: [
         {
             type: schema.Types.ObjectId,
             ref: "Review"
         }
     ],
+    owner: {
+        type: schema.Types.ObjectId,
+        ref: "User"
+    },
     createdAt: {
         type: Date,
         default: Date.now

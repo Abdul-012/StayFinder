@@ -112,18 +112,56 @@ body
 {
     text-decoration: none !important;
 }
-/* Card hover effect */
-.card-img-overlay
+
+.listing-card > a
 {
-    opacity: 0;
+    display: block;
+    overflow: hidden;
+    border-radius: 1rem;
 }
-.card-img-overlay:hover
+
+.listing-card .card-img-top
 {
-    /* transform: translateY(-5px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease; */
-    opacity: 0.2;
-    background-color: white;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.listing-card:hover .card-img-top
+{
+    transform: scale(1.04);
+    filter: brightness(0.88);
+}
+
+.listing-card:hover
+{
+    cursor: pointer;
+}
+
+.edit-image-preview
+{
+    width: 100%;
+    max-width: 420px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid #dddddd;
+    display: block;
+}
+
+.listing-map
+{
+    width: 100%;
+    height: 360px;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px)
+{
+    .listing-map
+    {
+        height: 280px;
+    }
 }
 
 
