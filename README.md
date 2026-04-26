@@ -7,7 +7,8 @@ A full-stack web application for discovering and sharing travel accommodations. 
 - **User Authentication**: Secure signup and login with Passport.js
 - **Property Listings**: Create, edit, and delete travel accommodations with detailed information
 - **Reviews & Ratings**: Add star ratings (1-5) and comments to listings
-- **Image Uploads**: Upload listing photos directly to Cloudinary
+- **Interactive Maps**: View listing locations with MapLibre GL and OpenFreeMap integration
+- **Image Uploads**: Upload listing photos directly to Cloudinary with automatic optimization
 - **Geolocation**: Auto-geocode property locations with coordinate overrides for accuracy
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Flash Messages**: Real-time user feedback for all actions
@@ -16,12 +17,14 @@ A full-stack web application for discovering and sharing travel accommodations. 
 ## 🛠️ Tech Stack
 
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Frontend**: EJS templating engine
+- **Database**: MongoDB with Mongoose ODM
+- **Frontend**: EJS templating engine, Bootstrap 5
 - **Authentication**: Passport.js with Local Strategy
-- **File Storage**: Cloudinary
+- **Maps**: MapLibre GL 5.22.0 with OpenFreeMap tiles
+- **File Storage**: Cloudinary with Multer integration
+- **Geolocation**: OpenStreetMap Nominatim API
 - **Validation**: Joi schema validation
-- **Styling**: CSS with custom utility classes
+- **Styling**: Bootstrap 5 + Custom CSS
 
 ## 📋 Prerequisites
 
@@ -73,16 +76,14 @@ Before you begin, ensure you have:
    npm start
    ```
 
-The application will be available at **http://localhost:8080**
-
-## 📁 Project Structure
+The application will be (MVC Architecture)
 
 ```
-├── controllers/        # Route logic handlers
+├── controllers/        # Route logic handlers (Controller layer)
 │   ├── listings.js     # Listing CRUD operations
 │   ├── reviews.js      # Review management
 │   └── users.js        # User authentication
-├── models/            # MongoDB schemas
+├── models/            # MongoDB schemas (Model layer)
 │   ├── listing.js      # Listing schema with geolocation
 │   ├── reviews.js      # Review schema
 │   └── user.js         # User schema with passport
@@ -90,19 +91,22 @@ The application will be available at **http://localhost:8080**
 │   ├── listing.js      # Listing routes
 │   ├── review.js       # Review routes
 │   └── user.js         # Auth routes
-├── views/             # EJS templates
-│   ├── listings/       # Listing pages (index, show, new, edit)
+├── views/             # EJS templates (View layer)
+│   ├── listings/       # Listing pages (index, show with map, new, edit)
 │   ├── users/          # User auth pages (login, signup)
-│   └── includes/       # Reusable components
+│   └── includes/       # Reusable components (navbar, footer, flash)
 ├── public/            # Static assets
-│   ├── css/           # Stylesheets
-│   └── js/            # Client-side scripts
+│   ├── css/           # Bootstrap 5 + Custom stylesheets
+│   └── js/            # Client-side scripts (MapLibre GL integration)
 ├── utils/             # Helper utilities
-│   ├── geocoding.js    # Location geocoding
-│   ├── wrapAsync.js    # Error handling wrapper
+│   ├── geocoding.js    # OpenStreetMap Nominatim integration
+│   ├── wrapAsync.js    # Async error handling wrapper
 │   └── ExpressError.js # Custom error class
-├── init/              # Database seeding
-├── middleware.js      # Custom middlewares
+├── init/              # Database seeding with sample data
+├── middleware.js      # Custom middlewares (auth, validation, ownership checks)
+├── schema.js          # Joi validation schemas
+├── cloudConfig.js     # Cloudinary configuration for image uploads
+└── app.js             # Express appdlewares
 ├── schema.js          # Joi validation schemas
 └── cloudConfig.js     # Cloudinary configuration
 ```
@@ -142,14 +146,16 @@ This verifies code syntax without executing the application.
 
 Create a `.env` file with the following variables:
 
-```env
-# Cloudinary Configuration
+```env (Required for image uploads)
 CLOUD_NAME=your_cloudinary_cloud_name
 CLOUD_API_KEY=your_cloudinary_api_key
 CLOUD_API_SECRET=your_cloudinary_api_secret
 
-# App Environment (development/production)
+# App Environment
 NODE_ENV=development
+```
+
+**Note**: MapLibre GL and OpenFreeMap work without additional API keys, but Cloudinary is required for photo uploads.E_ENV=development
 ```
 
 ## 🐛 Troubleshooting
